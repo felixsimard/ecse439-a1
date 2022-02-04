@@ -22,15 +22,6 @@ public interface HalFactory extends EFactory {
 	HalFactory eINSTANCE = ca.mcgill.emf.hal.impl.HalFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>HAL</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>HAL</em>'.
-	 * @generated
-	 */
-	HAL createHAL();
-
-	/**
 	 * Returns a new object of class '<em>Smart Home</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,15 +38,6 @@ public interface HalFactory extends EFactory {
 	 * @generated
 	 */
 	Room createRoom();
-
-	/**
-	 * Returns a new object of class '<em>Owner</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Owner</em>'.
-	 * @generated
-	 */
-	Owner createOwner();
 
 	/**
 	 * Returns a new object of class '<em>Automation Rule</em>'.

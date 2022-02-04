@@ -3,14 +3,16 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ca.mcgill.emf.hal;singleton:=true
 Automatic-Module-Name: ca.mcgill.emf.hal
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: ca.mcgill.emf.hal,
  ca.mcgill.emf.hal.impl,
  ca.mcgill.emf.hal.util
-Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.10.1";visibility:=reexport,
+ org.apache.log4j;bundle-version="1.2.15"
 Bundle-ActivationPolicy: lazy

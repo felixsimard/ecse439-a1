@@ -58,43 +58,6 @@ public interface HalPackage extends EPackage {
 	HalPackage eINSTANCE = ca.mcgill.emf.hal.impl.HalPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link ca.mcgill.emf.hal.impl.HALImpl <em>HAL</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ca.mcgill.emf.hal.impl.HALImpl
-	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getHAL()
-	 * @generated
-	 */
-	int HAL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Smarthome</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAL__SMARTHOME = 0;
-
-	/**
-	 * The number of structural features of the '<em>HAL</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAL_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>HAL</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAL_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link ca.mcgill.emf.hal.impl.SmartHomeImpl <em>Smart Home</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,7 +65,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getSmartHome()
 	 * @generated
 	 */
-	int SMART_HOME = 1;
+	int SMART_HOME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Operational</b></em>' attribute.
@@ -123,22 +86,13 @@ public interface HalPackage extends EPackage {
 	int SMART_HOME__ADDRESS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Owner</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SMART_HOME__OWNER = 2;
-
-	/**
 	 * The feature id for the '<em><b>Room</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SMART_HOME__ROOM = 3;
+	int SMART_HOME__ROOM = 2;
 
 	/**
 	 * The feature id for the '<em><b>Automationrule</b></em>' containment reference list.
@@ -147,7 +101,25 @@ public interface HalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SMART_HOME__AUTOMATIONRULE = 4;
+	int SMART_HOME__AUTOMATIONRULE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Owner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMART_HOME__OWNER = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMART_HOME__NAME = 5;
 
 	/**
 	 * The number of structural features of the '<em>Smart Home</em>' class.
@@ -156,7 +128,7 @@ public interface HalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SMART_HOME_FEATURE_COUNT = 5;
+	int SMART_HOME_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Smart Home</em>' class.
@@ -175,7 +147,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getRoom()
 	 * @generated
 	 */
-	int ROOM = 2;
+	int ROOM = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -214,43 +186,6 @@ public interface HalPackage extends EPackage {
 	int ROOM_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link ca.mcgill.emf.hal.impl.OwnerImpl <em>Owner</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ca.mcgill.emf.hal.impl.OwnerImpl
-	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getOwner()
-	 * @generated
-	 */
-	int OWNER = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OWNER__NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Owner</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OWNER_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Owner</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OWNER_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link ca.mcgill.emf.hal.impl.AutomationRuleImpl <em>Automation Rule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -258,7 +193,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getAutomationRule()
 	 * @generated
 	 */
-	int AUTOMATION_RULE = 4;
+	int AUTOMATION_RULE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -331,7 +266,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getDevice()
 	 * @generated
 	 */
-	int DEVICE = 5;
+	int DEVICE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -377,7 +312,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 6;
+	int ACTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Specificdevice</b></em>' reference.
@@ -414,7 +349,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getSpecificDevice()
 	 * @generated
 	 */
-	int SPECIFIC_DEVICE = 7;
+	int SPECIFIC_DEVICE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -487,7 +422,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getSensor()
 	 * @generated
 	 */
-	int SENSOR = 8;
+	int SENSOR = 6;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -533,7 +468,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getActuator()
 	 * @generated
 	 */
-	int ACTUATOR = 9;
+	int ACTUATOR = 7;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -588,7 +523,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getDeviceEvent()
 	 * @generated
 	 */
-	int DEVICE_EVENT = 10;
+	int DEVICE_EVENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -625,7 +560,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getCommand()
 	 * @generated
 	 */
-	int COMMAND = 11;
+	int COMMAND = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -662,7 +597,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getPreCondition()
 	 * @generated
 	 */
-	int PRE_CONDITION = 14;
+	int PRE_CONDITION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Is Negated</b></em>' attribute.
@@ -699,7 +634,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getConditionItem()
 	 * @generated
 	 */
-	int CONDITION_ITEM = 12;
+	int CONDITION_ITEM = 10;
 
 	/**
 	 * The feature id for the '<em><b>Is Negated</b></em>' attribute.
@@ -763,7 +698,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getBooleanExpression()
 	 * @generated
 	 */
-	int BOOLEAN_EXPRESSION = 13;
+	int BOOLEAN_EXPRESSION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Is Negated</b></em>' attribute.
@@ -818,7 +753,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getSensorEvent()
 	 * @generated
 	 */
-	int SENSOR_EVENT = 15;
+	int SENSOR_EVENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -864,7 +799,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getCommandEvent()
 	 * @generated
 	 */
-	int COMMAND_EVENT = 16;
+	int COMMAND_EVENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -910,7 +845,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getAutomationRuleEvent()
 	 * @generated
 	 */
-	int AUTOMATION_RULE_EVENT = 17;
+	int AUTOMATION_RULE_EVENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -947,7 +882,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getBooleanOperator()
 	 * @generated
 	 */
-	int BOOLEAN_OPERATOR = 18;
+	int BOOLEAN_OPERATOR = 16;
 
 	/**
 	 * The meta object id for the '{@link ca.mcgill.emf.hal.ComparisonOperator <em>Comparison Operator</em>}' enum.
@@ -957,28 +892,7 @@ public interface HalPackage extends EPackage {
 	 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 19;
-
-	/**
-	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.HAL <em>HAL</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>HAL</em>'.
-	 * @see ca.mcgill.emf.hal.HAL
-	 * @generated
-	 */
-	EClass getHAL();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ca.mcgill.emf.hal.HAL#getSmarthome <em>Smarthome</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Smarthome</em>'.
-	 * @see ca.mcgill.emf.hal.HAL#getSmarthome()
-	 * @see #getHAL()
-	 * @generated
-	 */
-	EReference getHAL_Smarthome();
+	int COMPARISON_OPERATOR = 17;
 
 	/**
 	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.SmartHome <em>Smart Home</em>}'.
@@ -1013,17 +927,6 @@ public interface HalPackage extends EPackage {
 	EAttribute getSmartHome_Address();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owner</em>'.
-	 * @see ca.mcgill.emf.hal.SmartHome#getOwner()
-	 * @see #getSmartHome()
-	 * @generated
-	 */
-	EReference getSmartHome_Owner();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link ca.mcgill.emf.hal.SmartHome#getRoom <em>Room</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1044,6 +947,28 @@ public interface HalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSmartHome_Automationrule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Owner</em>'.
+	 * @see ca.mcgill.emf.hal.SmartHome#getOwner()
+	 * @see #getSmartHome()
+	 * @generated
+	 */
+	EAttribute getSmartHome_Owner();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ca.mcgill.emf.hal.SmartHome#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see ca.mcgill.emf.hal.SmartHome#getName()
+	 * @see #getSmartHome()
+	 * @generated
+	 */
+	EAttribute getSmartHome_Name();
 
 	/**
 	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.Room <em>Room</em>}'.
@@ -1076,27 +1001,6 @@ public interface HalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoom_Specificdevice();
-
-	/**
-	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.Owner <em>Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Owner</em>'.
-	 * @see ca.mcgill.emf.hal.Owner
-	 * @generated
-	 */
-	EClass getOwner();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ca.mcgill.emf.hal.Owner#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see ca.mcgill.emf.hal.Owner#getName()
-	 * @see #getOwner()
-	 * @generated
-	 */
-	EAttribute getOwner_Name();
 
 	/**
 	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.AutomationRule <em>Automation Rule</em>}'.
@@ -1557,24 +1461,6 @@ public interface HalPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.HALImpl <em>HAL</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ca.mcgill.emf.hal.impl.HALImpl
-		 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getHAL()
-		 * @generated
-		 */
-		EClass HAL = eINSTANCE.getHAL();
-
-		/**
-		 * The meta object literal for the '<em><b>Smarthome</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference HAL__SMARTHOME = eINSTANCE.getHAL_Smarthome();
-
-		/**
 		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.SmartHomeImpl <em>Smart Home</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1601,14 +1487,6 @@ public interface HalPackage extends EPackage {
 		EAttribute SMART_HOME__ADDRESS = eINSTANCE.getSmartHome_Address();
 
 		/**
-		 * The meta object literal for the '<em><b>Owner</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SMART_HOME__OWNER = eINSTANCE.getSmartHome_Owner();
-
-		/**
 		 * The meta object literal for the '<em><b>Room</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1623,6 +1501,22 @@ public interface HalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SMART_HOME__AUTOMATIONRULE = eINSTANCE.getSmartHome_Automationrule();
+
+		/**
+		 * The meta object literal for the '<em><b>Owner</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SMART_HOME__OWNER = eINSTANCE.getSmartHome_Owner();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SMART_HOME__NAME = eINSTANCE.getSmartHome_Name();
 
 		/**
 		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.RoomImpl <em>Room</em>}' class.
@@ -1649,24 +1543,6 @@ public interface HalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOM__SPECIFICDEVICE = eINSTANCE.getRoom_Specificdevice();
-
-		/**
-		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.OwnerImpl <em>Owner</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ca.mcgill.emf.hal.impl.OwnerImpl
-		 * @see ca.mcgill.emf.hal.impl.HalPackageImpl#getOwner()
-		 * @generated
-		 */
-		EClass OWNER = eINSTANCE.getOwner();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OWNER__NAME = eINSTANCE.getOwner_Name();
 
 		/**
 		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.AutomationRuleImpl <em>Automation Rule</em>}' class.

@@ -66,13 +66,6 @@ public class HalSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case HalPackage.HAL: {
-			HAL hal = (HAL) theEObject;
-			T result = caseHAL(hal);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case HalPackage.SMART_HOME: {
 			SmartHome smartHome = (SmartHome) theEObject;
 			T result = caseSmartHome(smartHome);
@@ -83,13 +76,6 @@ public class HalSwitch<T> extends Switch<T> {
 		case HalPackage.ROOM: {
 			Room room = (Room) theEObject;
 			T result = caseRoom(room);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case HalPackage.OWNER: {
-			Owner owner = (Owner) theEObject;
-			T result = caseOwner(owner);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -210,21 +196,6 @@ public class HalSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>HAL</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>HAL</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseHAL(HAL object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Smart Home</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -251,21 +222,6 @@ public class HalSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRoom(Room object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Owner</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Owner</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOwner(Owner object) {
 		return null;
 	}
 

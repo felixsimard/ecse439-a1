@@ -21,22 +21,17 @@
       <genEnumLiterals ecoreEnumLiteral="hal.ecore#//ComparisonOperator/LESS_THEN_EQUAL"/>
       <genEnumLiterals ecoreEnumLiteral="hal.ecore#//ComparisonOperator/GREATER_THAN_EQUAL"/>
     </genEnums>
-    <genClasses ecoreClass="hal.ecore#//HAL">
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//HAL/smarthome"/>
-    </genClasses>
     <genClasses ecoreClass="hal.ecore#//SmartHome">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/isOperational"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/address"/>
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SmartHome/owner"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SmartHome/room"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SmartHome/automationrule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/name"/>
     </genClasses>
     <genClasses ecoreClass="hal.ecore#//Room">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//Room/name"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//Room/specificdevice"/>
-    </genClasses>
-    <genClasses ecoreClass="hal.ecore#//Owner">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//Owner/name"/>
     </genClasses>
     <genClasses ecoreClass="hal.ecore#//AutomationRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//AutomationRule/password"/>

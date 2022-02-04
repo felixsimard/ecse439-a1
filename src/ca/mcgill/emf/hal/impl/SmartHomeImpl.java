@@ -4,7 +4,6 @@ package ca.mcgill.emf.hal.impl;
 
 import ca.mcgill.emf.hal.AutomationRule;
 import ca.mcgill.emf.hal.HalPackage;
-import ca.mcgill.emf.hal.Owner;
 import ca.mcgill.emf.hal.Room;
 import ca.mcgill.emf.hal.SmartHome;
 
@@ -34,9 +33,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#isIsOperational <em>Is Operational</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getAddress <em>Address</em>}</li>
- *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getRoom <em>Room</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getAutomationrule <em>Automationrule</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -83,16 +83,6 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	protected String address = ADDRESS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Owner owner;
-
-	/**
 	 * The cached value of the '{@link #getRoom() <em>Room</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,6 +101,46 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	 * @ordered
 	 */
 	protected EList<AutomationRule> automationrule;
+
+	/**
+	 * The default value of the '{@link #getOwner() <em>Owner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwner()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OWNER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwner()
+	 * @generated
+	 * @ordered
+	 */
+	protected String owner = OWNER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,55 +209,6 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Owner getOwner() {
-		return owner;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwner(Owner newOwner, NotificationChain msgs) {
-		Owner oldOwner = owner;
-		owner = newOwner;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, HalPackage.SMART_HOME__OWNER,
-					oldOwner, newOwner);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOwner(Owner newOwner) {
-		if (newOwner != owner) {
-			NotificationChain msgs = null;
-			if (owner != null)
-				msgs = ((InternalEObject) owner).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - HalPackage.SMART_HOME__OWNER, null, msgs);
-			if (newOwner != null)
-				msgs = ((InternalEObject) newOwner).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - HalPackage.SMART_HOME__OWNER, null, msgs);
-			msgs = basicSetOwner(newOwner, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, HalPackage.SMART_HOME__OWNER, newOwner, newOwner));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Room> getRoom() {
 		if (room == null) {
 			room = new EObjectContainmentEList<Room>(Room.class, this, HalPackage.SMART_HOME__ROOM);
@@ -253,11 +234,51 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getOwner() {
+		return owner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwner(String newOwner) {
+		String oldOwner = owner;
+		owner = newOwner;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, HalPackage.SMART_HOME__OWNER, oldOwner, owner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, HalPackage.SMART_HOME__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case HalPackage.SMART_HOME__OWNER:
-			return basicSetOwner(null, msgs);
 		case HalPackage.SMART_HOME__ROOM:
 			return ((InternalEList<?>) getRoom()).basicRemove(otherEnd, msgs);
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
@@ -278,12 +299,14 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 			return isIsOperational();
 		case HalPackage.SMART_HOME__ADDRESS:
 			return getAddress();
-		case HalPackage.SMART_HOME__OWNER:
-			return getOwner();
 		case HalPackage.SMART_HOME__ROOM:
 			return getRoom();
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
 			return getAutomationrule();
+		case HalPackage.SMART_HOME__OWNER:
+			return getOwner();
+		case HalPackage.SMART_HOME__NAME:
+			return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -303,9 +326,6 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		case HalPackage.SMART_HOME__ADDRESS:
 			setAddress((String) newValue);
 			return;
-		case HalPackage.SMART_HOME__OWNER:
-			setOwner((Owner) newValue);
-			return;
 		case HalPackage.SMART_HOME__ROOM:
 			getRoom().clear();
 			getRoom().addAll((Collection<? extends Room>) newValue);
@@ -313,6 +333,12 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
 			getAutomationrule().clear();
 			getAutomationrule().addAll((Collection<? extends AutomationRule>) newValue);
+			return;
+		case HalPackage.SMART_HOME__OWNER:
+			setOwner((String) newValue);
+			return;
+		case HalPackage.SMART_HOME__NAME:
+			setName((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -332,14 +358,17 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		case HalPackage.SMART_HOME__ADDRESS:
 			setAddress(ADDRESS_EDEFAULT);
 			return;
-		case HalPackage.SMART_HOME__OWNER:
-			setOwner((Owner) null);
-			return;
 		case HalPackage.SMART_HOME__ROOM:
 			getRoom().clear();
 			return;
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
 			getAutomationrule().clear();
+			return;
+		case HalPackage.SMART_HOME__OWNER:
+			setOwner(OWNER_EDEFAULT);
+			return;
+		case HalPackage.SMART_HOME__NAME:
+			setName(NAME_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -357,12 +386,14 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 			return isOperational != IS_OPERATIONAL_EDEFAULT;
 		case HalPackage.SMART_HOME__ADDRESS:
 			return ADDRESS_EDEFAULT == null ? address != null : !ADDRESS_EDEFAULT.equals(address);
-		case HalPackage.SMART_HOME__OWNER:
-			return owner != null;
 		case HalPackage.SMART_HOME__ROOM:
 			return room != null && !room.isEmpty();
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
 			return automationrule != null && !automationrule.isEmpty();
+		case HalPackage.SMART_HOME__OWNER:
+			return OWNER_EDEFAULT == null ? owner != null : !OWNER_EDEFAULT.equals(owner);
+		case HalPackage.SMART_HOME__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -382,6 +413,10 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		result.append(isOperational);
 		result.append(", address: ");
 		result.append(address);
+		result.append(", owner: ");
+		result.append(owner);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

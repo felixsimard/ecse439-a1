@@ -13,5 +13,12 @@
             class="ca.mcgill.emf.hal.HalPackage"
             genModel="model/hal.genmodel"/>
    </extension>
+   
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated hal -->
+      <parser
+            type="hal"
+            class="ca.mcgill.emf.hal.util.SmartHomeResourceFactoryImpl"/>
+   </extension>
 
 </plugin>

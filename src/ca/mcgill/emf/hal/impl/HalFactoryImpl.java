@@ -56,14 +56,10 @@ public class HalFactoryImpl extends EFactoryImpl implements HalFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case HalPackage.HAL:
-			return createHAL();
 		case HalPackage.SMART_HOME:
 			return createSmartHome();
 		case HalPackage.ROOM:
 			return createRoom();
-		case HalPackage.OWNER:
-			return createOwner();
 		case HalPackage.AUTOMATION_RULE:
 			return createAutomationRule();
 		case HalPackage.ACTION:
@@ -130,16 +126,6 @@ public class HalFactoryImpl extends EFactoryImpl implements HalFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HAL createHAL() {
-		HALImpl hal = new HALImpl();
-		return hal;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public SmartHome createSmartHome() {
 		SmartHomeImpl smartHome = new SmartHomeImpl();
 		return smartHome;
@@ -153,16 +139,6 @@ public class HalFactoryImpl extends EFactoryImpl implements HalFactory {
 	public Room createRoom() {
 		RoomImpl room = new RoomImpl();
 		return room;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Owner createOwner() {
-		OwnerImpl owner = new OwnerImpl();
-		return owner;
 	}
 
 	/**

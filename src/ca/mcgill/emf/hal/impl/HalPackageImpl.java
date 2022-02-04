@@ -16,7 +16,6 @@ import ca.mcgill.emf.hal.Device;
 import ca.mcgill.emf.hal.DeviceEvent;
 import ca.mcgill.emf.hal.HalFactory;
 import ca.mcgill.emf.hal.HalPackage;
-import ca.mcgill.emf.hal.Owner;
 import ca.mcgill.emf.hal.PreCondition;
 import ca.mcgill.emf.hal.Room;
 import ca.mcgill.emf.hal.Sensor;
@@ -44,13 +43,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass halEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass smartHomeEClass = null;
 
 	/**
@@ -59,13 +51,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * @generated
 	 */
 	private EClass roomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass ownerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,24 +233,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getHAL() {
-		return halEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getHAL_Smarthome() {
-		return (EReference) halEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSmartHome() {
 		return smartHomeEClass;
 	}
@@ -293,7 +260,7 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSmartHome_Owner() {
+	public EReference getSmartHome_Room() {
 		return (EReference) smartHomeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -302,7 +269,7 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSmartHome_Room() {
+	public EReference getSmartHome_Automationrule() {
 		return (EReference) smartHomeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -311,8 +278,17 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSmartHome_Automationrule() {
-		return (EReference) smartHomeEClass.getEStructuralFeatures().get(4);
+	public EAttribute getSmartHome_Owner() {
+		return (EAttribute) smartHomeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSmartHome_Name() {
+		return (EAttribute) smartHomeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -340,24 +316,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 	 */
 	public EReference getRoom_Specificdevice() {
 		return (EReference) roomEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getOwner() {
-		return ownerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOwner_Name() {
-		return (EAttribute) ownerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -758,22 +716,17 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		halEClass = createEClass(HAL);
-		createEReference(halEClass, HAL__SMARTHOME);
-
 		smartHomeEClass = createEClass(SMART_HOME);
 		createEAttribute(smartHomeEClass, SMART_HOME__IS_OPERATIONAL);
 		createEAttribute(smartHomeEClass, SMART_HOME__ADDRESS);
-		createEReference(smartHomeEClass, SMART_HOME__OWNER);
 		createEReference(smartHomeEClass, SMART_HOME__ROOM);
 		createEReference(smartHomeEClass, SMART_HOME__AUTOMATIONRULE);
+		createEAttribute(smartHomeEClass, SMART_HOME__OWNER);
+		createEAttribute(smartHomeEClass, SMART_HOME__NAME);
 
 		roomEClass = createEClass(ROOM);
 		createEAttribute(roomEClass, ROOM__NAME);
 		createEReference(roomEClass, ROOM__SPECIFICDEVICE);
-
-		ownerEClass = createEClass(OWNER);
-		createEAttribute(ownerEClass, OWNER__NAME);
 
 		automationRuleEClass = createEClass(AUTOMATION_RULE);
 		createEAttribute(automationRuleEClass, AUTOMATION_RULE__PASSWORD);
@@ -870,12 +823,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 		commandEventEClass.getESuperTypes().add(this.getDeviceEvent());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(halEClass, ca.mcgill.emf.hal.HAL.class, "HAL", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHAL_Smarthome(), this.getSmartHome(), null, "smarthome", null, 0, -1,
-				ca.mcgill.emf.hal.HAL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(smartHomeEClass, SmartHome.class, "SmartHome", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSmartHome_IsOperational(), ecorePackage.getEBoolean(), "isOperational", "false", 0, 1,
@@ -883,15 +830,16 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSmartHome_Address(), ecorePackage.getEString(), "address", null, 0, 1, SmartHome.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSmartHome_Owner(), this.getOwner(), null, "owner", null, 1, 1, SmartHome.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEReference(getSmartHome_Room(), this.getRoom(), null, "room", null, 0, -1, SmartHome.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getSmartHome_Automationrule(), this.getAutomationRule(), null, "automationrule", null, 0, -1,
 				SmartHome.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSmartHome_Owner(), ecorePackage.getEString(), "owner", null, 0, 1, SmartHome.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSmartHome_Name(), ecorePackage.getEString(), "name", null, 0, 1, SmartHome.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roomEClass, Room.class, "Room", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoom_Name(), ecorePackage.getEString(), "name", null, 0, 1, Room.class, !IS_TRANSIENT,
@@ -899,10 +847,6 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 		initEReference(getRoom_Specificdevice(), this.getSpecificDevice(), null, "specificdevice", null, 0, -1,
 				Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(ownerEClass, Owner.class, "Owner", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOwner_Name(), ecorePackage.getEString(), "name", null, 0, 1, Owner.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(automationRuleEClass, AutomationRule.class, "AutomationRule", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

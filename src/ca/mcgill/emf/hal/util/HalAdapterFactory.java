@@ -67,11 +67,6 @@ public class HalAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected HalSwitch<Adapter> modelSwitch = new HalSwitch<Adapter>() {
 		@Override
-		public Adapter caseHAL(HAL object) {
-			return createHALAdapter();
-		}
-
-		@Override
 		public Adapter caseSmartHome(SmartHome object) {
 			return createSmartHomeAdapter();
 		}
@@ -79,11 +74,6 @@ public class HalAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseRoom(Room object) {
 			return createRoomAdapter();
-		}
-
-		@Override
-		public Adapter caseOwner(Owner object) {
-			return createOwnerAdapter();
 		}
 
 		@Override
@@ -176,20 +166,6 @@ public class HalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ca.mcgill.emf.hal.HAL <em>HAL</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ca.mcgill.emf.hal.HAL
-	 * @generated
-	 */
-	public Adapter createHALAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link ca.mcgill.emf.hal.SmartHome <em>Smart Home</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -214,20 +190,6 @@ public class HalAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRoomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ca.mcgill.emf.hal.Owner <em>Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ca.mcgill.emf.hal.Owner
-	 * @generated
-	 */
-	public Adapter createOwnerAdapter() {
 		return null;
 	}
 

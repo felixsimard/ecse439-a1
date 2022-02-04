@@ -17,9 +17,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link ca.mcgill.emf.hal.SmartHome#isIsOperational <em>Is Operational</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.SmartHome#getAddress <em>Address</em>}</li>
- *   <li>{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.SmartHome#getRoom <em>Room</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.SmartHome#getAutomationrule <em>Automationrule</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.SmartHome#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see ca.mcgill.emf.hal.HalPackage#getSmartHome()
@@ -73,28 +74,6 @@ public interface SmartHome extends EObject {
 	void setAddress(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Owner</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owner</em>' containment reference.
-	 * @see #setOwner(Owner)
-	 * @see ca.mcgill.emf.hal.HalPackage#getSmartHome_Owner()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	Owner getOwner();
-
-	/**
-	 * Sets the value of the '{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owner</em>' containment reference.
-	 * @see #getOwner()
-	 * @generated
-	 */
-	void setOwner(Owner value);
-
-	/**
 	 * Returns the value of the '<em><b>Room</b></em>' containment reference list.
 	 * The list contents are of type {@link ca.mcgill.emf.hal.Room}.
 	 * <!-- begin-user-doc -->
@@ -117,5 +96,49 @@ public interface SmartHome extends EObject {
 	 * @generated
 	 */
 	EList<AutomationRule> getAutomationrule();
+
+	/**
+	 * Returns the value of the '<em><b>Owner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owner</em>' attribute.
+	 * @see #setOwner(String)
+	 * @see ca.mcgill.emf.hal.HalPackage#getSmartHome_Owner()
+	 * @model
+	 * @generated
+	 */
+	String getOwner();
+
+	/**
+	 * Sets the value of the '{@link ca.mcgill.emf.hal.SmartHome#getOwner <em>Owner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owner</em>' attribute.
+	 * @see #getOwner()
+	 * @generated
+	 */
+	void setOwner(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see ca.mcgill.emf.hal.HalPackage#getSmartHome_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link ca.mcgill.emf.hal.SmartHome#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // SmartHome
