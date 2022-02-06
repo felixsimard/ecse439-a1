@@ -56,46 +56,41 @@ public class HALController {
 		
 	}
 	
-	public static String addSpecificDeviceToRoom(String roomName, String deviceType, String uniqueDeviceName, String deviceCaliber) {
-		
+	public static String addSpecificDeviceToRoom(String roomName, String deviceType, String uniqueDeviceName, String deviceTypeClass) {
 		SmartHome sh = HALApplication.getSmartHome();
-		Actuator a = HalFactory.eINSTANCE.createActuator();
-		Sensor s = HalFactory.eINSTANCE.createSensor();
-		SpecificDevice sd = HalFactory.eINSTANCE.createSpecificDevice();
-		Room r = HalFactory.eINSTANCE.createRoom();
-		r= findRoom(roomName);
-	
+		Device d;
+		Room r = findRoom(roomName);
+		
+		// Room exists
 		if (r == null ) {
-			return "roomName " + roomName + "does not exist ";
+			return "Room name " + roomName + "does not exist";
 		}
-		// Device uniqueness
+		
+		// Device type exists
 		if(!existsDeviceType(deviceType)) {
 			return "Device with type " + deviceType + " does not exist";
 		}
 		
+		// Specific device unique
 		if(existsSpecificDeviceName(uniqueDeviceName, roomName)) {
-			return "SpecificDevice with UniqueDeviceName " + uniqueDeviceName + " already exists";
+			return "Specific device '" + uniqueDeviceName + "' of type '" + deviceType + "' already exists";
 		}
 
-		// Actuator
-		if (deviceCaliber == "Actuator" ) {
-			a = (Actuator) findDevice(deviceType);
-			sd.setDevice(a);
-			sd.setName(uniqueDeviceName);
-			sd.setRoom(r);
+		// Actuator or Sensor
+		if (getDeviceTypeClass(deviceTypeClass).equals("Actuator")) {
+			d = (Actuator) findDevice(deviceType);
+		} else {
+			d = (Sensor) findDevice(deviceType);
 		}
 		
-		// Sensor
-		s = (Sensor) findDevice(deviceType);
-		sd.setDevice(s);
+		// Configure new specific device
+		SpecificDevice sd = HalFactory.eINSTANCE.createSpecificDevice();
+		sd.setDevice(d);
 		sd.setName(uniqueDeviceName);
 		sd.setRoom(r);
-		/*
-		SpecificDevice sd1 = HalFactory.eINSTANCE.createSpecificDevice();
-		sd1 = findSpecificDevice("abc123", roomName);
-		System.out.println("HEY : " + sd1.getName());
-		*/
-		//TO DO Need to store in array list ?
+		
+		HALApplication.save();
+
 		return null;
 	}
 	
@@ -195,6 +190,13 @@ public class HALController {
 		return specificDevices;
 	}
 	
+	public static String getDeviceTypeClass(String deviceTypeClass) {
+		if(deviceTypeClass.contains("Actuator")) {
+			return "Actuator";
+		} else {
+			return "Sensor";
+		}
+	}
 	
 	// validation
 	

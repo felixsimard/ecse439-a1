@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <hal:SmartHome xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hal="http://www.example.org/hal" xmi:id="_BS6ZsId7EeyVGeTZglDheg" isOperational="true" address="439 Trottier Ave" owner="Group 05" name="Group5 Tech Mansion">
-  <device xsi:type="hal:Sensor" xmi:id="_BS_5QId7EeyVGeTZglDheg" type="Temperature Sensor"/>
+  <room xmi:id="_yvg1IIePEeylhLXwo7MUag" name="Living Room">
+  </room>
+  <device xsi:type="hal:Sensor" xmi:id="_BS_5QId7EeyVGeTZglDheg" type="Temperature Sensor" specificdevice="_Iz7qYIeXEey2yrcigNP_dw _UOUqEYeXEey4_t9U1zMLYg _c25CYIeXEeyaNIlpuSj5UQ"/>
   <device xsi:type="hal:Sensor" xmi:id="_BTLfcId7EeyVGeTZglDheg" type="Movement Sensor"/>
-  <device xsi:type="hal:Sensor" xmi:id="_BTMtkId7EeyVGeTZglDheg" type="Light Sensor"/>
-  <device xsi:type="hal:Actuator" xmi:id="_BTN7sId7EeyVGeTZglDheg" type="Heater"/>
+  <device xsi:type="hal:Sensor" xmi:id="_BTMtkId7EeyVGeTZglDheg" type="Light Sensor" specificdevice="_maFIgIeaEeygYoscCOSv6A"/>
+  <device xsi:type="hal:Actuator" xmi:id="_BTN7sId7EeyVGeTZglDheg" type="Heater" specificdevice="_mDL9YIeYEeyRK8pS_0EYcA"/>
   <device xsi:type="hal:Actuator" xmi:id="_BTPw4Id7EeyVGeTZglDheg" type="Lock"/>
-  <device xsi:type="hal:Actuator" xmi:id="_BTQ_AId7EeyVGeTZglDheg" type="Light Switch"/>
+  <device xsi:type="hal:Actuator" xmi:id="_BTQ_AId7EeyVGeTZglDheg" type="Light Switch" specificdevice="_WMIlIIeYEeypJbdWgf6Hzg"/>
 </hal:SmartHome>

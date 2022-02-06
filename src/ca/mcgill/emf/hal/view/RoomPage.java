@@ -63,23 +63,12 @@ public class RoomPage extends JFrame {
 	private String error = null;
 	
 	private DefaultTableModel roomsDtm;
-	private String specificDevicesColumnNames[] = {"Specific Device"};
+	private String specificDevicesColumnNames[] = {"Devices in this room"};
 	private static final int HEIGHT_TEAMS_TABLE = 100;
 	
 	public RoomPage() {
-		HALController.initDeviceTypes(); // see Controller
+		HALController.initDeviceTypes(); // initialize device types
 		initComponents();
-//		HALController.addRoom("LOL");
-//		HALController.addDecvice("Sensor", "Sensor");
-//		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc123", "Sensor");
-//		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc1234", "Sensor");
-//		HALController.getAllSpecificDevicesInRoom("LOL");
-//		HALController.deleteSpecificDecviceFromRoom("abc123", "LOL");
-//		HALController.getAllSpecificDevicesInRoom("LOL");
-//		HALController.addRoom("LOL1");
-//		HALController.getAllRooms();
-//		//HALController.deleteRoom("LOL1");
-//		HALController.getAllRooms();
 		refreshData(null);
 	}
 	
@@ -95,23 +84,24 @@ public class RoomPage extends JFrame {
 		errorMessage.setForeground(Color.RED);
 		
 		// Room
-		initializeButton(showRoomButton, "Show", this::showRoomButtonActionPerformed);
+		initializeButton(showRoomButton, "Load", this::showRoomButtonActionPerformed);
 		initializeButton(deleteRoomButton, "Delete", this::deleteRoomButtonActionPerformed);
 		initializeButton(clearRoomButton, "Clear", this::clearRoomButtonActionPerformed);
 		roomNameText.setText("");
-		newRoomNameLabel.setText("New Room Name:");
+		newRoomNameLabel.setText("Create/Edit Room");
 		initializeButton(addRoomButton, "Add", this::addRoomButtonActionPerformed);
 		initializeButton(updateRoomButton, "Update", this::updateRoomButtonActionPerformed);
 		
 		// Device
-		initializeButton(clearDeviceButton, "Clear", this::clearRoomButtonActionPerformed);
-		removeSpecificDeviceLabel.setText("Select a row in the table and hit the delete key to remove a specific device");
+		initializeButton(clearDeviceButton, "Clear", this::clearDeviceTypeButtonActionPerformed);
+		removeSpecificDeviceLabel.setText("Select a row in the table and hit the delete key to remove a specific device.");
 		this.add(specificDeviceScrollPane);
 		Dimension d = specificDeviceTable.getPreferredSize();
 		specificDeviceScrollPane.setPreferredSize(new Dimension(d.width, HEIGHT_TEAMS_TABLE));
 		specificDeviceScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		specificDeviceTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// enable delete key in table to remove a row (team)
+		
+		// enable delete key in table to remove a row (specific device)
 		InputMap inputMap = specificDeviceTable.getInputMap(JComponent.WHEN_FOCUSED);
 		ActionMap actionMap = specificDeviceTable.getActionMap();
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete");
@@ -120,13 +110,13 @@ public class RoomPage extends JFrame {
 		    	specificDevicesTableDeleteKeyActionPerformed(deleteEvent);
 		    }
 		});
-		newSpecificDeviceNameLabel.setText("New Specific Device Name:");
-		initializeButton(addSpecificDeviceButton, "Add Specific Device", this::addSpecificDeviceButtonActionPerformed);
+		newSpecificDeviceNameLabel.setText("Add a device to this room");
+		initializeButton(addSpecificDeviceButton, "Add Device to Room", this::addSpecificDeviceButtonActionPerformed);
 		
 		
 		// Global settings and listeners
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Smart Home System: Room Management");
+		setTitle("Smart Home System - Group 05");
 
 		// Horizontal line elements
 		JSeparator horizontalLine = new JSeparator();
@@ -157,11 +147,11 @@ public class RoomPage extends JFrame {
 								.addComponent(deleteRoomButton)
 								.addComponent(clearRoomButton))
 						.addComponent(horizontalLine)
+						.addComponent(roomNameLabel)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(roomNameLabel)
 								.addComponent(roomNameText))
+						.addComponent(newRoomNameLabel)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(newRoomNameLabel)
 								.addComponent(newRoomNameTextField, 200, 200, 400)
 								.addComponent(addRoomButton)
 								.addComponent(updateRoomButton))
@@ -173,8 +163,9 @@ public class RoomPage extends JFrame {
 						.addGroup(layout.createSequentialGroup()
 								.addComponent(devicesList, 200, 200, 400)
 								.addComponent(clearDeviceButton))
+						.addComponent(horizontalLine)
+						.addComponent(newSpecificDeviceNameLabel)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(newSpecificDeviceNameLabel)
 								.addComponent(newSpecificDeviceTextField, 200, 200, 400)
 								.addComponent(addSpecificDeviceButton)))
 				);
@@ -201,11 +192,11 @@ public class RoomPage extends JFrame {
 								.addComponent(deleteRoomButton)
 								.addComponent(clearRoomButton))
 						.addComponent(horizontalLine)
+						.addComponent(roomNameLabel)
 						.addGroup(layout.createParallelGroup()
-								.addComponent(roomNameLabel)
 								.addComponent(roomNameText))
+						.addComponent(newRoomNameLabel)
 						.addGroup(layout.createParallelGroup()
-								.addComponent(newRoomNameLabel)
 								.addComponent(newRoomNameTextField)
 								.addComponent(addRoomButton)
 								.addComponent(updateRoomButton))
@@ -215,10 +206,11 @@ public class RoomPage extends JFrame {
 						.addComponent(specificDeviceScrollPane)
 						.addComponent(deviceTypeLabel)
 						.addGroup(layout.createParallelGroup()
-								.addComponent(devicesList, 200, 200, 400)
+								.addComponent(devicesList)
 								.addComponent(clearDeviceButton))
+						.addComponent(horizontalLine)
+						.addComponent(newSpecificDeviceNameLabel)
 						.addGroup(layout.createParallelGroup()
-								.addComponent(newSpecificDeviceNameLabel)
 								.addComponent(newSpecificDeviceTextField)
 								.addComponent(addSpecificDeviceButton)))
 				);
@@ -259,11 +251,10 @@ public class RoomPage extends JFrame {
 			// populate devices list
 			deviceTypeLabel.setText("Choose which device you would like to add to this room.");
 			devicesList.removeAllItems();
-			int dindex = 0;
 			for (String dName : HALController.getAllDeviceTypes()) {
 				devicesList.addItem(dName);
 			};
-			devicesList.setSelectedIndex(dindex);
+			devicesList.setSelectedIndex(-1);
 			
 			
 			roomsList.setEnabled(index > 0);
@@ -298,6 +289,8 @@ public class RoomPage extends JFrame {
 				updateRoomButton.setEnabled(true);
 				devicesList.setEnabled(false);
 				clearDeviceButton.setEnabled(false);
+				devicesList.setEnabled(true);
+				clearDeviceButton.setEnabled(true);
 				newSpecificDeviceTextField.setEnabled(true);
 				addSpecificDeviceButton.setEnabled(true);
 			}
@@ -342,16 +335,18 @@ public class RoomPage extends JFrame {
 		}
 	}
 	
-	// TODO
 	private void addSpecificDeviceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		//(String roomName, String deviceType, String uniqueDeviceName, String deviceCaliber)
-		HALController.addSpecificDeviceToRoom(error, error, error, error);
-		//error = HALController.addSpecificDevice(roomNameText.getText(), newSpecificDeviceTextField.getText());
-		//refreshData(spcificDeviceNameText.getText());
+		String roomSelected = (String) roomsList.getSelectedItem();
+		String deviceTypeSelected = (String) devicesList.getSelectedItem();
+		Device d = HALController.findDevice(deviceTypeSelected);
+		String uniqueDeviceName = newSpecificDeviceTextField.getText();
+		HALController.addSpecificDeviceToRoom(roomSelected, deviceTypeSelected, uniqueDeviceName, d.getClass().getCanonicalName().toString());
+		refreshData(roomSelected);
 	}
 	
 	// TODO this methods needs to get the room from the combo box
 	private void specificDevicesTableDeleteKeyActionPerformed(java.awt.event.ActionEvent evt) {
+		System.out.println("deleteing sd");
 		if (specificDeviceTable.getSelectedRow() != -1) {
 			String specificDeviceName = (String) specificDeviceTable.getModel().getValueAt(specificDeviceTable.getSelectedRow(), 0);
 	        int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device " + specificDeviceName + "?", 
@@ -370,6 +365,12 @@ public class RoomPage extends JFrame {
 		refreshData(null);
 	}
 	
+	private void clearDeviceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		error = null;
+		devicesList.setSelectedIndex(-1);
+		newSpecificDeviceTextField.setText("");
+	}
+	
 	private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		error = HALController.addRoom(newRoomNameTextField.getText());
 		refreshData(newRoomNameTextField.getText());
@@ -385,8 +386,8 @@ public class RoomPage extends JFrame {
 		roomsDtm.setColumnIdentifiers(specificDevicesColumnNames);
 		specificDeviceTable.setModel(roomsDtm);
 		if (foundRoom != null) {
-			for (String teamName : foundRoom.getSpecificDeviceNames()) {
-				Object[] obj = {teamName};
+			for (String sd : foundRoom.getSpecificDeviceNames()) {
+				Object[] obj = {sd};
 				roomsDtm.addRow(obj);
 			}
 		}
