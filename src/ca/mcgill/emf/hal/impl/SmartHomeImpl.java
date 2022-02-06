@@ -3,6 +3,7 @@
 package ca.mcgill.emf.hal.impl;
 
 import ca.mcgill.emf.hal.AutomationRule;
+import ca.mcgill.emf.hal.Device;
 import ca.mcgill.emf.hal.HalPackage;
 import ca.mcgill.emf.hal.Room;
 import ca.mcgill.emf.hal.SmartHome;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getAutomationrule <em>Automationrule</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.impl.SmartHomeImpl#getDevice <em>Device</em>}</li>
  * </ul>
  *
  * @generated
@@ -141,6 +143,16 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDevice() <em>Device</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDevice()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Device> device;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,6 +288,18 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Device> getDevice() {
+		if (device == null) {
+			device = new EObjectContainmentEList<Device>(Device.class, this, HalPackage.SMART_HOME__DEVICE);
+		}
+		return device;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -283,6 +307,8 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 			return ((InternalEList<?>) getRoom()).basicRemove(otherEnd, msgs);
 		case HalPackage.SMART_HOME__AUTOMATIONRULE:
 			return ((InternalEList<?>) getAutomationrule()).basicRemove(otherEnd, msgs);
+		case HalPackage.SMART_HOME__DEVICE:
+			return ((InternalEList<?>) getDevice()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -307,6 +333,8 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 			return getOwner();
 		case HalPackage.SMART_HOME__NAME:
 			return getName();
+		case HalPackage.SMART_HOME__DEVICE:
+			return getDevice();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +368,10 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		case HalPackage.SMART_HOME__NAME:
 			setName((String) newValue);
 			return;
+		case HalPackage.SMART_HOME__DEVICE:
+			getDevice().clear();
+			getDevice().addAll((Collection<? extends Device>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -370,6 +402,9 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 		case HalPackage.SMART_HOME__NAME:
 			setName(NAME_EDEFAULT);
 			return;
+		case HalPackage.SMART_HOME__DEVICE:
+			getDevice().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -394,6 +429,8 @@ public class SmartHomeImpl extends MinimalEObjectImpl.Container implements Smart
 			return OWNER_EDEFAULT == null ? owner != null : !OWNER_EDEFAULT.equals(owner);
 		case HalPackage.SMART_HOME__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case HalPackage.SMART_HOME__DEVICE:
+			return device != null && !device.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

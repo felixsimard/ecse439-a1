@@ -1,1 +1,8 @@
-
+<?xml version="1.0" encoding="ASCII"?>
+<hal:SmartHome xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hal="http://www.example.org/hal" xmi:id="_Ifg8AIcHEeyi4c0aOu4g_w" isOperational="true" address="439 Trottier Ave" owner="Group 05" name="Group5 Tech Mansion">
+  <room xmi:id="_IfmbkIcHEeyi4c0aOu4g_w" name="LOL123">
+    <specificdevice xmi:id="_If0eAIcHEeyi4c0aOu4g_w" name="abc1234" device="_IfyBwIcHEeyi4c0aOu4g_w"/>
+  </room>
+  <room xmi:id="_If0eAYcHEeyi4c0aOu4g_w" name="LOL1"/>
+  <device xsi:type="hal:Sensor" xmi:id="_IfyBwIcHEeyi4c0aOu4g_w" type="Sensor" specificdevice="_If0eAIcHEeyi4c0aOu4g_w"/>
+</hal:SmartHome>

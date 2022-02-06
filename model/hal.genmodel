@@ -28,6 +28,7 @@
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SmartHome/automationrule"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/owner"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//SmartHome/name"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SmartHome/device"/>
     </genClasses>
     <genClasses ecoreClass="hal.ecore#//Room">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hal.ecore#//Room/name"/>
@@ -53,6 +54,7 @@
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SpecificDevice/deviceevent"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SpecificDevice/action"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SpecificDevice/conditionitem"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hal.ecore#//SpecificDevice/room"/>
     </genClasses>
     <genClasses ecoreClass="hal.ecore#//Sensor"/>
     <genClasses ecoreClass="hal.ecore#//Actuator">

@@ -122,13 +122,22 @@ public interface HalPackage extends EPackage {
 	int SMART_HOME__NAME = 5;
 
 	/**
+	 * The feature id for the '<em><b>Device</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMART_HOME__DEVICE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Smart Home</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SMART_HOME_FEATURE_COUNT = 6;
+	int SMART_HOME_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Smart Home</em>' class.
@@ -397,13 +406,22 @@ public interface HalPackage extends EPackage {
 	int SPECIFIC_DEVICE__CONDITIONITEM = 4;
 
 	/**
+	 * The feature id for the '<em><b>Room</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIFIC_DEVICE__ROOM = 5;
+
+	/**
 	 * The number of structural features of the '<em>Specific Device</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPECIFIC_DEVICE_FEATURE_COUNT = 5;
+	int SPECIFIC_DEVICE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Specific Device</em>' class.
@@ -971,6 +989,17 @@ public interface HalPackage extends EPackage {
 	EAttribute getSmartHome_Name();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link ca.mcgill.emf.hal.SmartHome#getDevice <em>Device</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Device</em>'.
+	 * @see ca.mcgill.emf.hal.SmartHome#getDevice()
+	 * @see #getSmartHome()
+	 * @generated
+	 */
+	EReference getSmartHome_Device();
+
+	/**
 	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.Room <em>Room</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1184,6 +1213,17 @@ public interface HalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSpecificDevice_Conditionitem();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ca.mcgill.emf.hal.SpecificDevice#getRoom <em>Room</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Room</em>'.
+	 * @see ca.mcgill.emf.hal.SpecificDevice#getRoom()
+	 * @see #getSpecificDevice()
+	 * @generated
+	 */
+	EReference getSpecificDevice_Room();
 
 	/**
 	 * Returns the meta object for class '{@link ca.mcgill.emf.hal.Sensor <em>Sensor</em>}'.
@@ -1519,6 +1559,14 @@ public interface HalPackage extends EPackage {
 		EAttribute SMART_HOME__NAME = eINSTANCE.getSmartHome_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Device</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SMART_HOME__DEVICE = eINSTANCE.getSmartHome_Device();
+
+		/**
 		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.RoomImpl <em>Room</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1687,6 +1735,14 @@ public interface HalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SPECIFIC_DEVICE__CONDITIONITEM = eINSTANCE.getSpecificDevice_Conditionitem();
+
+		/**
+		 * The meta object literal for the '<em><b>Room</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPECIFIC_DEVICE__ROOM = eINSTANCE.getSpecificDevice_Room();
 
 		/**
 		 * The meta object literal for the '{@link ca.mcgill.emf.hal.impl.SensorImpl <em>Sensor</em>}' class.

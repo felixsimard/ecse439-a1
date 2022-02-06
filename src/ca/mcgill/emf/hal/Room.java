@@ -49,11 +49,13 @@ public interface Room extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Specificdevice</b></em>' containment reference list.
 	 * The list contents are of type {@link ca.mcgill.emf.hal.SpecificDevice}.
+	 * It is bidirectional and its opposite is '{@link ca.mcgill.emf.hal.SpecificDevice#getRoom <em>Room</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Specificdevice</em>' containment reference list.
 	 * @see ca.mcgill.emf.hal.HalPackage#getRoom_Specificdevice()
-	 * @model containment="true"
+	 * @see ca.mcgill.emf.hal.SpecificDevice#getRoom
+	 * @model opposite="room" containment="true"
 	 * @generated
 	 */
 	EList<SpecificDevice> getSpecificdevice();

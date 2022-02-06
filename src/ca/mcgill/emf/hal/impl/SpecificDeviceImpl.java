@@ -7,6 +7,7 @@ import ca.mcgill.emf.hal.ConditionItem;
 import ca.mcgill.emf.hal.Device;
 import ca.mcgill.emf.hal.DeviceEvent;
 import ca.mcgill.emf.hal.HalPackage;
+import ca.mcgill.emf.hal.Room;
 import ca.mcgill.emf.hal.SpecificDevice;
 
 import java.util.Collection;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -39,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ca.mcgill.emf.hal.impl.SpecificDeviceImpl#getDeviceevent <em>Deviceevent</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SpecificDeviceImpl#getAction <em>Action</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.impl.SpecificDeviceImpl#getConditionitem <em>Conditionitem</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.impl.SpecificDeviceImpl#getRoom <em>Room</em>}</li>
  * </ul>
  *
  * @generated
@@ -256,6 +259,49 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Room getRoom() {
+		if (eContainerFeatureID() != HalPackage.SPECIFIC_DEVICE__ROOM)
+			return null;
+		return (Room) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRoom(Room newRoom, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newRoom, HalPackage.SPECIFIC_DEVICE__ROOM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRoom(Room newRoom) {
+		if (newRoom != eInternalContainer()
+				|| (eContainerFeatureID() != HalPackage.SPECIFIC_DEVICE__ROOM && newRoom != null)) {
+			if (EcoreUtil.isAncestor(this, newRoom))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newRoom != null)
+				msgs = ((InternalEObject) newRoom).eInverseAdd(this, HalPackage.ROOM__SPECIFICDEVICE, Room.class, msgs);
+			msgs = basicSetRoom(newRoom, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, HalPackage.SPECIFIC_DEVICE__ROOM, newRoom, newRoom));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -269,6 +315,10 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getAction()).basicAdd(otherEnd, msgs);
 		case HalPackage.SPECIFIC_DEVICE__CONDITIONITEM:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getConditionitem()).basicAdd(otherEnd, msgs);
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetRoom((Room) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -289,8 +339,24 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 			return ((InternalEList<?>) getAction()).basicRemove(otherEnd, msgs);
 		case HalPackage.SPECIFIC_DEVICE__CONDITIONITEM:
 			return ((InternalEList<?>) getConditionitem()).basicRemove(otherEnd, msgs);
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			return basicSetRoom(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			return eInternalContainer().eInverseRemove(this, HalPackage.ROOM__SPECIFICDEVICE, Room.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -313,6 +379,8 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 			return getAction();
 		case HalPackage.SPECIFIC_DEVICE__CONDITIONITEM:
 			return getConditionitem();
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			return getRoom();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,6 +412,9 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 			getConditionitem().clear();
 			getConditionitem().addAll((Collection<? extends ConditionItem>) newValue);
 			return;
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			setRoom((Room) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -371,6 +442,9 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 		case HalPackage.SPECIFIC_DEVICE__CONDITIONITEM:
 			getConditionitem().clear();
 			return;
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			setRoom((Room) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -393,6 +467,8 @@ public class SpecificDeviceImpl extends MinimalEObjectImpl.Container implements 
 			return action != null && !action.isEmpty();
 		case HalPackage.SPECIFIC_DEVICE__CONDITIONITEM:
 			return conditionitem != null && !conditionitem.isEmpty();
+		case HalPackage.SPECIFIC_DEVICE__ROOM:
+			return getRoom() != null;
 		}
 		return super.eIsSet(featureID);
 	}

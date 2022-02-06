@@ -18,8 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -114,10 +113,25 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room {
 	 */
 	public EList<SpecificDevice> getSpecificdevice() {
 		if (specificdevice == null) {
-			specificdevice = new EObjectContainmentEList<SpecificDevice>(SpecificDevice.class, this,
-					HalPackage.ROOM__SPECIFICDEVICE);
+			specificdevice = new EObjectContainmentWithInverseEList<SpecificDevice>(SpecificDevice.class, this,
+					HalPackage.ROOM__SPECIFICDEVICE, HalPackage.SPECIFIC_DEVICE__ROOM);
 		}
 		return specificdevice;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case HalPackage.ROOM__SPECIFICDEVICE:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getSpecificdevice()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

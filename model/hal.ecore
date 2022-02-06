@@ -11,11 +11,13 @@
         eType="#//AutomationRule" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="device" upperBound="-1"
+        eType="#//Device" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Room">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specificdevice" upperBound="-1"
-        eType="#//SpecificDevice" containment="true"/>
+        eType="#//SpecificDevice" containment="true" eOpposite="#//SpecificDevice/room"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AutomationRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -51,6 +53,8 @@
         eType="#//Action" eOpposite="#//Action/specificdevice"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionitem" upperBound="-1"
         eType="#//ConditionItem" eOpposite="#//ConditionItem/specificdevice"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="room" lowerBound="1" eType="#//Room"
+        eOpposite="#//Room/specificdevice"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//Device"/>
   <eClassifiers xsi:type="ecore:EClass" name="Actuator" eSuperTypes="#//Device">

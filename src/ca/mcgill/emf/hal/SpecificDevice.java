@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ca.mcgill.emf.hal.SpecificDevice#getDeviceevent <em>Deviceevent</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.SpecificDevice#getAction <em>Action</em>}</li>
  *   <li>{@link ca.mcgill.emf.hal.SpecificDevice#getConditionitem <em>Conditionitem</em>}</li>
+ *   <li>{@link ca.mcgill.emf.hal.SpecificDevice#getRoom <em>Room</em>}</li>
  * </ul>
  *
  * @see ca.mcgill.emf.hal.HalPackage#getSpecificDevice()
@@ -112,5 +113,29 @@ public interface SpecificDevice extends EObject {
 	 * @generated
 	 */
 	EList<ConditionItem> getConditionitem();
+
+	/**
+	 * Returns the value of the '<em><b>Room</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link ca.mcgill.emf.hal.Room#getSpecificdevice <em>Specificdevice</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Room</em>' container reference.
+	 * @see #setRoom(Room)
+	 * @see ca.mcgill.emf.hal.HalPackage#getSpecificDevice_Room()
+	 * @see ca.mcgill.emf.hal.Room#getSpecificdevice
+	 * @model opposite="specificdevice" required="true" transient="false"
+	 * @generated
+	 */
+	Room getRoom();
+
+	/**
+	 * Sets the value of the '{@link ca.mcgill.emf.hal.SpecificDevice#getRoom <em>Room</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Room</em>' container reference.
+	 * @see #getRoom()
+	 * @generated
+	 */
+	void setRoom(Room value);
 
 } // SpecificDevice
