@@ -349,13 +349,15 @@ public class RoomPage extends JFrame {
 		System.out.println("deleteing sd");
 		if (specificDeviceTable.getSelectedRow() != -1) {
 			String specificDeviceName = (String) specificDeviceTable.getModel().getValueAt(specificDeviceTable.getSelectedRow(), 0);
-	        int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device " + specificDeviceName + "?", 
+			String roomSelected = (String) roomsList.getSelectedItem();
+			int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device " + specificDeviceName + "?", 
 	        		"Confirm Deletion",	JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (choice == 0) { 
+				//System.out.println("was here");
 				//TODO --> need to get the room name
-				//error = HALController.deleteSpecificDecviceFromRoom(specificDeviceName, specificDeviceName);
+				error = HALController.deleteSpecificDeviceFromRoom(specificDeviceName, roomSelected);
 				//error = TournamentController.removeTeam(teamName);
-				refreshData(roomNameText.getText());
+				refreshData(roomSelected);
 			}
 		}
 	}
