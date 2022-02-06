@@ -3,11 +3,14 @@ package ca.mcgill.emf.hal.view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import ca.mcgill.emf.hal.*;
+import ca.mcgill.emf.hal.application.HALApplication;
 import ca.mcgill.emf.hal.controller.HALController;
 import ca.mcgill.emf.hal.controller.TORoom;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -18,7 +21,19 @@ public class RoomPage extends JFrame {
 	
 	// UI elements
 	private JLabel errorMessage = new JLabel();
-	// group
+	
+	// SmartHome info
+	private JLabel shNameLabel = new JLabel();
+	private JLabel shOwnerLabel = new JLabel();
+	private JLabel shAddressLabel = new JLabel();
+	private JLabel shIsOperationalLabel = new JLabel();
+	
+	// Navigation
+	private JLabel roomLabelDivider = new JLabel();
+	private JLabel deviceLabelDivider = new JLabel();
+	private JLabel specificDeviceLabelDivider = new JLabel();
+		
+	// Room
 	private JComboBox<String> roomsList = new JComboBox<String>(new String[0]);
 	private JButton showRoomButton = new JButton();
 	private JButton deleteRoomButton = new JButton();
@@ -29,62 +44,67 @@ public class RoomPage extends JFrame {
 	private JTextField newRoomNameTextField = new JTextField();
 	private JButton addRoomButton = new JButton();
 	private JButton updateRoomButton = new JButton();
-	// group's teams
+			
+	// Device and SpecificDevice
+	private JLabel deviceTypeLabel = new JLabel();
+	private JComboBox<String> devicesList = new JComboBox<String>(new String[0]);
+	private JButton clearDeviceButton = new JButton();
 	private JLabel removeSpecificDeviceLabel = new JLabel();
 	private JTable specificDeviceTable = new JTable();
 	private JScrollPane specificDeviceScrollPane = new JScrollPane(specificDeviceTable);
 	private JLabel newSpecificDeviceNameLabel = new JLabel();
 	private JTextField newSpecificDeviceTextField = new JTextField();
 	private JButton addSpecificDeviceButton = new JButton();
-	// TODO add a label, text field, and button to support adding of a team to a group
+	
 	
 	// UI elements
-	//private JLabel errorMessage = new JLabel();
-	// room
 	
-	// data elements
+	// error message
 	private String error = null;
 	
-	private DefaultTableModel teamsDtm;
-	private String teamsColumnNames[] = {"Specific Device"};
+	private DefaultTableModel roomsDtm;
+	private String specificDevicesColumnNames[] = {"Specific Device"};
 	private static final int HEIGHT_TEAMS_TABLE = 100;
 	
 	public RoomPage() {
+		HALController.initDeviceTypes(); // see Controller
 		initComponents();
-		HALController.addRoom("LOL");
-		HALController.addDecvice("Sensor", "Sensor");
-		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc123", "Sensor");
-		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc1234", "Sensor");
-		HALController.getAllSpecificDevicesInRoom("LOL");
-		HALController.deleteSpecificDecviceFromRoom("abc123", "LOL");
-		HALController.getAllSpecificDevicesInRoom("LOL");
-		HALController.addRoom("LOL1");
-		HALController.getAllRooms();
-		//HALController.deleteRoom("LOL1");
-		HALController.getAllRooms();
+//		HALController.addRoom("LOL");
+//		HALController.addDecvice("Sensor", "Sensor");
+//		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc123", "Sensor");
+//		HALController.addSpecificDecviceToRoom("LOL", "Sensor", "abc1234", "Sensor");
+//		HALController.getAllSpecificDevicesInRoom("LOL");
+//		HALController.deleteSpecificDecviceFromRoom("abc123", "LOL");
+//		HALController.getAllSpecificDevicesInRoom("LOL");
+//		HALController.addRoom("LOL1");
+//		HALController.getAllRooms();
+//		//HALController.deleteRoom("LOL1");
+//		HALController.getAllRooms();
+		refreshData(null);
 	}
 	
 	
 	@SuppressWarnings("serial")
 	private void initComponents() {
-		// elements for error message
-		//errorMessage.setForeground(Color.RED);
 		
-		//initializeButton(addRoomButton, "Add Room", this::addRoomButtonActionPerformed);
-		
+		// Dividers	
+		setHeader(roomLabelDivider, "Manage Rooms");
+		setHeader(deviceLabelDivider, "Manage Device Types");
+		setHeader(specificDeviceLabelDivider, "Manage Devices in Rooms");
+			
 		errorMessage.setForeground(Color.RED);
 		
-		// elements for group
+		// Room
 		initializeButton(showRoomButton, "Show", this::showRoomButtonActionPerformed);
 		initializeButton(deleteRoomButton, "Delete", this::deleteRoomButtonActionPerformed);
 		initializeButton(clearRoomButton, "Clear", this::clearRoomButtonActionPerformed);
-		roomNameLabel.setText("Room Name:");
 		roomNameText.setText("");
 		newRoomNameLabel.setText("New Room Name:");
 		initializeButton(addRoomButton, "Add", this::addRoomButtonActionPerformed);
 		initializeButton(updateRoomButton, "Update", this::updateRoomButtonActionPerformed);
 		
-		
+		// Device
+		initializeButton(clearDeviceButton, "Clear", this::clearRoomButtonActionPerformed);
 		removeSpecificDeviceLabel.setText("Select a row in the table and hit the delete key to remove a specific device");
 		this.add(specificDeviceScrollPane);
 		Dimension d = specificDeviceTable.getPreferredSize();
@@ -97,19 +117,21 @@ public class RoomPage extends JFrame {
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete");
 		actionMap.put("delete", new AbstractAction() {
 			public void actionPerformed(ActionEvent deleteEvent) {
-		    	teamsTableDeleteKeyActionPerformed(deleteEvent);
+		    	specificDevicesTableDeleteKeyActionPerformed(deleteEvent);
 		    }
 		});
 		newSpecificDeviceNameLabel.setText("New Specific Device Name:");
 		initializeButton(addSpecificDeviceButton, "Add Specific Device", this::addSpecificDeviceButtonActionPerformed);
 		
-		// global settings and listeners
+		
+		// Global settings and listeners
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Smart Home System: Room Management");
 
-		// horizontal line elements
+		// Horizontal line elements
 		JSeparator horizontalLine = new JSeparator();
-		// layout
+		
+		// Layout
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setAutoCreateGaps(true);
@@ -117,7 +139,18 @@ public class RoomPage extends JFrame {
 		layout.setHorizontalGroup(
 				layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup()
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(shNameLabel))
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(shAddressLabel))
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(shOwnerLabel))
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(shIsOperationalLabel))
+						.addComponent(horizontalLine)
 						.addComponent(errorMessage)
+						.addComponent(horizontalLine)
+						.addComponent(roomLabelDivider)
 						.addGroup(layout.createSequentialGroup()
 								.addComponent(roomsList, 200, 200, 400)
 								.addComponent(showRoomButton)
@@ -132,8 +165,14 @@ public class RoomPage extends JFrame {
 								.addComponent(newRoomNameTextField, 200, 200, 400)
 								.addComponent(addRoomButton)
 								.addComponent(updateRoomButton))
+						.addComponent(horizontalLine)
+						.addComponent(specificDeviceLabelDivider)
 						.addComponent(removeSpecificDeviceLabel)
 						.addComponent(specificDeviceScrollPane)
+						.addComponent(deviceTypeLabel)
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(devicesList, 200, 200, 400)
+								.addComponent(clearDeviceButton))
 						.addGroup(layout.createSequentialGroup()
 								.addComponent(newSpecificDeviceNameLabel)
 								.addComponent(newSpecificDeviceTextField, 200, 200, 400)
@@ -143,7 +182,19 @@ public class RoomPage extends JFrame {
 		layout.setVerticalGroup(
 				layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(shNameLabel))
+						.addGroup(layout.createParallelGroup()
+								.addComponent(shAddressLabel))
+						.addGroup(layout.createParallelGroup()
+								.addComponent(shOwnerLabel))
+						.addGroup(layout.createParallelGroup()
+								.addComponent(shIsOperationalLabel))
+						.addComponent(horizontalLine)
 						.addComponent(errorMessage)
+						.addComponent(horizontalLine)
+						.addComponent(roomLabelDivider)
+						.addComponent(horizontalLine)
 						.addGroup(layout.createParallelGroup()
 								.addComponent(roomsList)
 								.addComponent(showRoomButton)
@@ -158,8 +209,14 @@ public class RoomPage extends JFrame {
 								.addComponent(newRoomNameTextField)
 								.addComponent(addRoomButton)
 								.addComponent(updateRoomButton))
+						.addComponent(horizontalLine)
+						.addComponent(specificDeviceLabelDivider)
 						.addComponent(removeSpecificDeviceLabel)
 						.addComponent(specificDeviceScrollPane)
+						.addComponent(deviceTypeLabel)
+						.addGroup(layout.createParallelGroup()
+								.addComponent(devicesList, 200, 200, 400)
+								.addComponent(clearDeviceButton))
 						.addGroup(layout.createParallelGroup()
 								.addComponent(newSpecificDeviceNameLabel)
 								.addComponent(newSpecificDeviceTextField)
@@ -173,12 +230,22 @@ public class RoomPage extends JFrame {
 		// error
 		errorMessage.setText(error);
 		if (error == null || error.length() == 0) {
-			// retrieve the group
+			
+			// SmartHome info
+			SmartHome sh = HALApplication.getSmartHome();
+			setHeader(shNameLabel, sh.getName());
+			shAddressLabel.setText("Address: " + sh.getAddress());
+			shOwnerLabel.setText("Owner: " + sh.getOwner());
+			String isOperationalStr = sh.isIsOperational() ? "active" : "stopped";
+			shIsOperationalLabel.setText("Status: " + isOperationalStr);
+				
+			// retrieve the room
 			TORoom foundRoom = null;
 			if (roomName != null) {
 				foundRoom = HALController.getRoom(roomName);
 			}
-			// populate group list
+			
+			// populate rooms list
 			roomsList.removeAllItems();
 			int index = 0, foundIndex = -1;
 			for (String rName : HALController.getAllRooms()) {
@@ -188,12 +255,23 @@ public class RoomPage extends JFrame {
 				}
 				index++;
 			};
-			// enable groups list UI elements only if at least one group exist
+			
+			// populate devices list
+			deviceTypeLabel.setText("Choose which device you would like to add to this room.");
+			devicesList.removeAllItems();
+			int dindex = 0;
+			for (String dName : HALController.getAllDeviceTypes()) {
+				devicesList.addItem(dName);
+			};
+			devicesList.setSelectedIndex(dindex);
+			
+			
 			roomsList.setEnabled(index > 0);
 			roomsList.setSelectedIndex(foundIndex);
 			showRoomButton.setEnabled(index > 0);
 			deleteRoomButton.setEnabled(index > 0);
-			// populate other UI elements depending on whether a group was found or not
+			
+			// enable UI elements if a room is selected			
 			if (foundIndex == -1) {
 				foundRoom = null;
 				// group
@@ -206,19 +284,20 @@ public class RoomPage extends JFrame {
 				clearRoomButton.setEnabled(false);
 				addRoomButton.setEnabled(true);
 				updateRoomButton.setEnabled(false);
+				devicesList.setEnabled(false);
+				clearDeviceButton.setEnabled(false);
 				newSpecificDeviceTextField.setEnabled(false);
 				addSpecificDeviceButton.setEnabled(false);
 			} else {
-				// group
-				roomNameText.setText(foundRoom.getName());
+				roomNameText.setText("Room selected: " + foundRoom.getName());
 				newRoomNameTextField.setText(foundRoom.getName());
-				// group's teams
 				populateSpecificDeviceTable(foundRoom);
 				newSpecificDeviceTextField.setText("");
-				// set allowed UI elements to enabled
 				clearRoomButton.setEnabled(true);
 				addRoomButton.setEnabled(false);
 				updateRoomButton.setEnabled(true);
+				devicesList.setEnabled(false);
+				clearDeviceButton.setEnabled(false);
 				newSpecificDeviceTextField.setEnabled(true);
 				addSpecificDeviceButton.setEnabled(true);
 			}
@@ -238,6 +317,11 @@ public class RoomPage extends JFrame {
 		button.addActionListener(actionListener);
 	}
 	
+	private void setHeader(JLabel label, String text) {
+		label.setText(text);
+		label.setFont(new Font("Dialog", Font.BOLD, 14));
+	}
+	
 	/** Action Listeners **/
 	
 	
@@ -249,7 +333,7 @@ public class RoomPage extends JFrame {
 	private void deleteRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		if (roomsList.getSelectedIndex() != -1) {
 			String roomName = (String) roomsList.getSelectedItem();
-	        int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete room " + roomName + "?", 
+	        int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete room '" + roomName + "'?", 
 	        		"Confirm Deletion",	JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (choice == 0) { 
 				error = HALController.deleteRoom(roomName);
@@ -261,13 +345,13 @@ public class RoomPage extends JFrame {
 	// TODO
 	private void addSpecificDeviceButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		//(String roomName, String deviceType, String uniqueDeviceName, String deviceCaliber)
-		HALController.addSpecificDecviceToRoom(error, error, error, error);
+		HALController.addSpecificDeviceToRoom(error, error, error, error);
 		//error = HALController.addSpecificDevice(roomNameText.getText(), newSpecificDeviceTextField.getText());
 		//refreshData(spcificDeviceNameText.getText());
 	}
 	
 	// TODO this methods needs to get the room from the combo box
-	private void teamsTableDeleteKeyActionPerformed(java.awt.event.ActionEvent evt) {
+	private void specificDevicesTableDeleteKeyActionPerformed(java.awt.event.ActionEvent evt) {
 		if (specificDeviceTable.getSelectedRow() != -1) {
 			String specificDeviceName = (String) specificDeviceTable.getModel().getValueAt(specificDeviceTable.getSelectedRow(), 0);
 	        int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device " + specificDeviceName + "?", 
@@ -296,15 +380,14 @@ public class RoomPage extends JFrame {
 		refreshData(newRoomNameTextField.getText());
 	}
 	
-	//TODO
 	private void populateSpecificDeviceTable(TORoom foundRoom) {
-		teamsDtm = new DefaultTableModel(0, 0);
-		teamsDtm.setColumnIdentifiers(teamsColumnNames);
-		specificDeviceTable.setModel(teamsDtm);
+		roomsDtm = new DefaultTableModel(0, 0);
+		roomsDtm.setColumnIdentifiers(specificDevicesColumnNames);
+		specificDeviceTable.setModel(roomsDtm);
 		if (foundRoom != null) {
 			for (String teamName : foundRoom.getSpecificDeviceNames()) {
 				Object[] obj = {teamName};
-				teamsDtm.addRow(obj);
+				roomsDtm.addRow(obj);
 			}
 		}
 	}

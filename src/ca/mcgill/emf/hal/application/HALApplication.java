@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import ca.mcgill.emf.hal.*;
 import ca.mcgill.emf.hal.HalFactory;
 import ca.mcgill.emf.hal.HalPackage;
+import ca.mcgill.emf.hal.controller.HALController;
 
 public class HALApplication {
 	
@@ -55,8 +56,8 @@ public class HALApplication {
 			sh.setOwner("Group 05");
 			sh.setIsOperational(true);
 			sh.setName("Group5 Tech Mansion");
+			
 		}
 		return sh;
 	}
-
 }

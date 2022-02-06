@@ -27,7 +27,7 @@ public class HALController {
 		return null;
 	}
 	
-	public static String addDecvice(String type, String deviceType) {
+	public static String addDevice(String type, String deviceType) {
 		//check if the type is valid
 		if(isDeviceTypeValid(deviceType)) {
 			return "The devide type you specified is incorrect";
@@ -56,8 +56,7 @@ public class HALController {
 		
 	}
 	
-	public static String addSpecificDecviceToRoom(String roomName, String deviceType, String uniqueDeviceName, String deviceCaliber) {
-		
+	public static String addSpecificDeviceToRoom(String roomName, String deviceType, String uniqueDeviceName, String deviceCaliber) {
 		
 		SmartHome sh = HALApplication.getSmartHome();
 		Actuator a = HalFactory.eINSTANCE.createActuator();
@@ -65,30 +64,28 @@ public class HALController {
 		SpecificDevice sd = HalFactory.eINSTANCE.createSpecificDevice();
 		Room r = HalFactory.eINSTANCE.createRoom();
 		r= findRoom(roomName);
-		
-		System.out.println("X");
+	
 		if (r == null ) {
 			return "roomName " + roomName + "does not exist ";
 		}
-		System.out.println("XX");
-		//device type is unique
+		// Device uniqueness
 		if(!existsDeviceType(deviceType)) {
 			return "Device with type " + deviceType + " does not exist";
 		}
-		System.out.println("XXX");
+		
 		if(existsSpecificDeviceName(uniqueDeviceName, roomName)) {
 			return "SpecificDevice with UniqueDeviceName " + uniqueDeviceName + " already exists";
 		}
-		System.out.println("XXXX");
-		//It was an actuator
+
+		// Actuator
 		if (deviceCaliber == "Actuator" ) {
 			a = (Actuator) findDevice(deviceType);
 			sd.setDevice(a);
 			sd.setName(uniqueDeviceName);
 			sd.setRoom(r);
 		}
-		System.out.println("XXXX");
-		//It was an sensor
+		
+		// Sensor
 		s = (Sensor) findDevice(deviceType);
 		sd.setDevice(s);
 		sd.setName(uniqueDeviceName);
@@ -102,7 +99,7 @@ public class HALController {
 		return null;
 	}
 	
-	public static String deleteSpecificDecviceFromRoom(String uniqueDeviceName, String roomName) {
+	public static String deleteSpecificDeviceFromRoom(String uniqueDeviceName, String roomName) {
 		Room r = HalFactory.eINSTANCE.createRoom();
 		
 		r = findRoom(roomName);
@@ -118,7 +115,6 @@ public class HALController {
 					for (SpecificDevice sd : r1.getSpecificdevice()) {
 						if(sd.getName().equals(uniqueDeviceName)) {
 							//delete that specific device
-							System.out.println("HEREEEEEEE");
 							sd.setDevice(null);
 							sd.setName(null);
 							sd.setRoom(null); //is this how you set the room to null
@@ -133,26 +129,26 @@ public class HALController {
 	}
 	
 	public static String deleteRoom(String roomName) {
-		Room r = HalFactory.eINSTANCE.createRoom();
-
-		r = findRoom(roomName);
+		Room r = findRoom(roomName);
 		if (r != null) {
 			SmartHome sm = HALApplication.getSmartHome();
+			List<SpecificDevice> sdToBeDeleted = new ArrayList<SpecificDevice>();
 			for(Room r1 : sm.getRoom()) {
 				if(r1.getName().equals(roomName)) {
 					for (SpecificDevice sd : r1.getSpecificdevice()) {
 						sd.setDevice(null);
 						sd.setName(null);
 						sd.setRoom(null);
-					}
-					r1.setName(null);		
-					System.out.println("All good till here");
-					sm.getRoom().remove(r1);
-					//Problem here
-					System.out.println("All good till here 1");
-					
+						sdToBeDeleted.add(sd);
+					}	
+					while(sdToBeDeleted.size() > 0) {
+						SpecificDevice d = sdToBeDeleted.get(0);
+						r.getSpecificdevice().remove(d);
+					}	
 				}
 			}
+			sm.getRoom().remove(r);
+			HALApplication.save();
 		}
 		return null;
 	}
@@ -160,7 +156,7 @@ public class HALController {
 	public static String updateRoomName(String newRoomName, String oldRoomName) {
 
 		if (oldRoomName.equals(newRoomName)) {
-			return "Cant chnage the name if they are the same";
+			return "The specified room name is the same as the current name.";
 		}
 		Room r = findRoom(oldRoomName);
 		if (r != null) {
@@ -172,17 +168,22 @@ public class HALController {
 		return "This room does not exist";
 	}
 	
-	//room would already be checked if it exists
 	public static List<String> getAllRooms() {
 		ArrayList<String> rooms = new ArrayList<String>();
 		SmartHome sm = HALApplication.getSmartHome();
-
 		for (Room r : sm.getRoom()) {
 			rooms.add(r.getName());
 		}
-		printList(rooms);
-		System.out.println("DONE");
 		return rooms;
+	}
+	
+	public static List<String> getAllDeviceTypes() {
+		ArrayList<String> devices = new ArrayList<String>();
+		SmartHome sm = HALApplication.getSmartHome();
+		for (Device d : sm.getDevice()) {
+			devices.add(d.getType());
+		}
+		return devices;
 	}
 	
 	public static List<String> getAllSpecificDevicesInRoom(String roomName) {
@@ -191,10 +192,8 @@ public class HALController {
 		for (SpecificDevice sd : r.getSpecificdevice()) {
 			specificDevices.add(sd.getName());
 		}
-		printList(specificDevices);
 		return specificDevices;
 	}
-	
 	
 	
 	// validation
@@ -221,11 +220,38 @@ public class HALController {
 	
 	
 	// helper methods
+	
 	public static void printList(ArrayList<String> a) {
 		for(int i = 0; i < a.size(); i++) {   
 		    System.out.print(a.get(i) + " ");
 		}  
 		
+	}
+	
+	// Initializing device types to be added to rooms
+	public static void initDeviceTypes() {
+		// As defined in the assignment PDF, we programmatically add a set of devices to support their additions to a Room
+		List<String> sensorsToAdd = new ArrayList<String>();
+		List<String> actuatorsToAdd = new ArrayList<String>();
+		sensorsToAdd.add("Temperature Sensor");
+		sensorsToAdd.add("Movement Sensor");
+		sensorsToAdd.add("Light Sensor");
+		actuatorsToAdd.add("Heater");
+		actuatorsToAdd.add("Lock");
+		actuatorsToAdd.add("Light Switch");
+		for(String d : sensorsToAdd) {
+			if(findDevice(d) == null) {
+				addDevice(d, "Sensor");
+				HALApplication.save();
+			}
+		}
+		for(String d : actuatorsToAdd) {
+			if(findDevice(d) == null) {
+				addDevice(d, "Actuator");
+				HALApplication.save();
+			}
+		}
+		return;
 	}
 	
 	public static Room findRoom(String roomName) {
