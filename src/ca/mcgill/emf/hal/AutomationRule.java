@@ -68,7 +68,7 @@ public interface AutomationRule extends EObject {
 	 * @return the value of the '<em>Precondition</em>' containment reference.
 	 * @see #setPrecondition(PreCondition)
 	 * @see ca.mcgill.emf.hal.HalPackage#getAutomationRule_Precondition()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	PreCondition getPrecondition();

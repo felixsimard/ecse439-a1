@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <hal:SmartHome xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hal="http://www.example.org/hal" xmi:id="__B4A0IeeEeyrSvv8SRqYQQ" isOperational="true" address="439 Trottier Ave" owner="Group 05" name="Group5 Tech Mansion">
-  <room xmi:id="_CKJZUIefEeyrSvv8SRqYQQ" name="lol">
-    <specificdevice xmi:id="_GqPgYIefEeyrSvv8SRqYQQ" name="abc123" device="__B4A0YeeEeyrSvv8SRqYQQ"/>
-    <specificdevice xmi:id="_7PGdUIefEeyrSvv8SRqYQQ" name="345" device="__CIfgIeeEeyrSvv8SRqYQQ"/>
-    <specificdevice xmi:id="_kYr0UIehEeyXOMQIvzhqMg" name="qqqq" device="__CHRYIeeEeyrSvv8SRqYQQ"/>
-  </room>
-  <room xmi:id="_EavtgIegEeyrSvv8SRqYQQ" name="123">
-    <specificdevice xmi:id="_FXkiIIegEeyrSvv8SRqYQQ" name="235632" device="__CHRYIeeEeyrSvv8SRqYQQ"/>
-    <specificdevice xmi:id="_GX3hgIegEeyrSvv8SRqYQQ" name="234" device="__CHRYIeeEeyrSvv8SRqYQQ"/>
-  </room>
-  <device xsi:type="hal:Sensor" xmi:id="__B4A0YeeEeyrSvv8SRqYQQ" type="Temperature Sensor" specificdevice="_GqPgYIefEeyrSvv8SRqYQQ"/>
-  <device xsi:type="hal:Sensor" xmi:id="__CHRYIeeEeyrSvv8SRqYQQ" type="Movement Sensor" specificdevice="_FXkiIIegEeyrSvv8SRqYQQ _GX3hgIegEeyrSvv8SRqYQQ _kYr0UIehEeyXOMQIvzhqMg"/>
-  <device xsi:type="hal:Sensor" xmi:id="__CIfgIeeEeyrSvv8SRqYQQ" type="Light Sensor" specificdevice="_7PGdUIefEeyrSvv8SRqYQQ"/>
+  <device xsi:type="hal:Sensor" xmi:id="__B4A0YeeEeyrSvv8SRqYQQ" type="Temperature Sensor"/>
+  <device xsi:type="hal:Sensor" xmi:id="__CHRYIeeEeyrSvv8SRqYQQ" type="Movement Sensor"/>
+  <device xsi:type="hal:Sensor" xmi:id="__CIfgIeeEeyrSvv8SRqYQQ" type="Light Sensor"/>
   <device xsi:type="hal:Actuator" xmi:id="__CJGkIeeEeyrSvv8SRqYQQ" type="Heater"/>
   <device xsi:type="hal:Actuator" xmi:id="__CKUsIeeEeyrSvv8SRqYQQ" type="Lock"/>
   <device xsi:type="hal:Actuator" xmi:id="__CLi0IeeEeyrSvv8SRqYQQ" type="Light Switch"/>

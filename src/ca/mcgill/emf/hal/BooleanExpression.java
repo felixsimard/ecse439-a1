@@ -54,7 +54,7 @@ public interface BooleanExpression extends PreCondition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Precondition</em>' containment reference list.
 	 * @see ca.mcgill.emf.hal.HalPackage#getBooleanExpression_Precondition()
-	 * @model containment="true" lower="2" transient="true"
+	 * @model containment="true" lower="2" upper="2" transient="true"
 	 * @generated
 	 */
 	EList<PreCondition> getPrecondition();

@@ -1,7 +1,7 @@
 package ca.mcgill.emf.hal.controller;
 
-import java.awt.font.NumericShaper.Range;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -11,7 +11,12 @@ import ca.mcgill.emf.hal.application.HALApplication;
 public class HALController {
 	
 	// modifier methods
-
+	
+	/**
+	 * Add a room
+	 * @param roomName
+	 * @return
+	 */
 	public static String addRoom(String roomName) {
 		if(isStringValid(roomName)) {
 			return "Room name must be specified";
@@ -27,7 +32,19 @@ public class HALController {
 		return null;
 	}
 	
+	/**
+	 * Add a device type (e.g.: Light sensor, Temperature Sensor, Lock, Heater, etc.)
+	 * @param type
+	 * @param deviceType
+	 * @return
+	 */
 	public static String addDevice(String type, String deviceType) {
+		
+		// Specific device name is valid
+		if(isStringValid(type)) {
+			return "Device type name must be valid";
+		}
+		
 		//check if the type is valid
 		if(isDeviceTypeValid(deviceType)) {
 			return "The devide type you specified is incorrect";
@@ -56,10 +73,23 @@ public class HALController {
 		
 	}
 	
+	/**
+	 * Add a specific device to a Room
+	 * @param roomName
+	 * @param deviceType
+	 * @param uniqueDeviceName
+	 * @param deviceTypeClass
+	 * @return
+	 */
 	public static String addSpecificDeviceToRoom(String roomName, String deviceType, String uniqueDeviceName, String deviceTypeClass) {
 		SmartHome sh = HALApplication.getSmartHome();
 		Device d;
 		Room r = findRoom(roomName);
+		
+		// Specific device name is valid
+		if(isStringValid(uniqueDeviceName)) {
+			return "Device name must be valid";
+		}
 		
 		// Room exists
 		if (r == null ) {
@@ -74,6 +104,11 @@ public class HALController {
 		// Specific device unique
 		if(existsSpecificDeviceName(uniqueDeviceName, roomName)) {
 			return "Specific device '" + uniqueDeviceName + "' of type '" + deviceType + "' already exists";
+		}
+		
+		// Make sure a device type was selected
+		if(deviceTypeClass == null || deviceTypeClass.equals("")) {
+			return "Select a device type to add it to this room.";
 		}
 
 		// Actuator or Sensor
@@ -94,6 +129,12 @@ public class HALController {
 		return null;
 	}
 	
+	/**
+	 * Delete a specific device from a Room
+	 * @param uniqueDeviceName
+	 * @param roomName
+	 * @return
+	 */
 	public static String deleteSpecificDeviceFromRoom(String uniqueDeviceName, String roomName) {
 		Room r = HalFactory.eINSTANCE.createRoom();
 		
@@ -122,36 +163,46 @@ public class HALController {
 		
 		return "This room does not exist";
 	}
-	
+		
+	/**
+	 * Delete a Room
+	 * @param roomName
+	 * @return
+	 */
 	public static String deleteRoom(String roomName) {
 		Room r = findRoom(roomName);
 		if (r != null) {
-			SmartHome sm = HALApplication.getSmartHome();
+			SmartHome sh = HALApplication.getSmartHome();
 			List<SpecificDevice> sdToBeDeleted = new ArrayList<SpecificDevice>();
-			for(Room r1 : sm.getRoom()) {
-				if(r1.getName().equals(roomName)) {
-					for (SpecificDevice sd : r1.getSpecificdevice()) {
-						sd.setDevice(null);
-						sd.setName(null);
-						sd.setRoom(null);
-						sdToBeDeleted.add(sd);
-					}	
-					while(sdToBeDeleted.size() > 0) {
-						SpecificDevice d = sdToBeDeleted.get(0);
-						r.getSpecificdevice().remove(d);
-					}	
-				}
+			for(SpecificDevice sd : r.getSpecificdevice()) {
+				sdToBeDeleted.add(sd);
 			}
-			sm.getRoom().remove(r);
+			Iterator<SpecificDevice> sdToBeDeleted_iterator = sdToBeDeleted.iterator();
+			while(sdToBeDeleted_iterator.hasNext()) {
+				SpecificDevice d = sdToBeDeleted_iterator.next();
+				d.setDevice(null);
+				d.setName(null);
+				d.setRoom(null);
+				r.getSpecificdevice().remove(d);
+			}	
+			sh.getRoom().remove(r);
 			HALApplication.save();
 		}
 		return null;
 	}
-	
+		
+	/**
+	 * Update room name
+	 * @param newRoomName
+	 * @param oldRoomName
+	 * @return
+	 */
 	public static String updateRoomName(String newRoomName, String oldRoomName) {
-
+		if(isStringValid(newRoomName)) {
+			return "Room name must be a valid string";
+		}
 		if (oldRoomName.equals(newRoomName)) {
-			return "The specified room name is the same as the current name.";
+			return "The specified room name is the same as the current name";
 		}
 		Room r = findRoom(oldRoomName);
 		if (r != null) {
@@ -159,9 +210,10 @@ public class HALController {
 			HALApplication.save();
 			return null;
 		}
-
 		return "This room does not exist";
 	}
+	
+	/*--------------------------------------------------------*/
 	
 	public static List<String> getAllRooms() {
 		ArrayList<String> rooms = new ArrayList<String>();
@@ -198,6 +250,8 @@ public class HALController {
 		}
 	}
 	
+	/*--------------------------------------------------------*/
+	
 	// validation
 	
 	public static boolean existsRoom(String roomName) {
@@ -219,6 +273,7 @@ public class HALController {
 	public static boolean isDeviceTypeValid(String s) {
 		return s == null || (!s.equals("Sensor") && !s.equals("Actuator"));
 	}
+
 	
 	
 	// helper methods
@@ -298,10 +353,12 @@ public class HALController {
 		Room r = findRoom(roomName);
 		if (r != null) {
 			List<String> specificDevices = new ArrayList<String>();
+			List<String> deviceTypes = new ArrayList<String>();
 			for (SpecificDevice sd : r.getSpecificdevice()) {
 				specificDevices.add(sd.getName());
+				deviceTypes.add(sd.getDevice().getType().toString());
 			}
-			result = new TORoom(r.getName(), specificDevices);
+			result = new TORoom(r.getName(), specificDevices, deviceTypes);
 		}
 		return result;
 	}

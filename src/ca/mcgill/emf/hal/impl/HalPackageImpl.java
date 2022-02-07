@@ -879,7 +879,7 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 		initEReference(getAutomationRule_Action(), this.getAction(), null, "action", null, 0, -1, AutomationRule.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAutomationRule_Precondition(), this.getPreCondition(), null, "precondition", null, 1, 1,
+		initEReference(getAutomationRule_Precondition(), this.getPreCondition(), null, "precondition", null, 0, 1,
 				AutomationRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAutomationRule_IsActivated(), ecorePackage.getEBoolean(), "isActivated", "true", 0, 1,
@@ -957,7 +957,7 @@ public class HalPackageImpl extends EPackageImpl implements HalPackage {
 		initEAttribute(getBooleanExpression_BooleanOperator(), this.getBooleanOperator(), "booleanOperator", null, 0, 1,
 				BooleanExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getBooleanExpression_Precondition(), this.getPreCondition(), null, "precondition", null, 2, -1,
+		initEReference(getBooleanExpression_Precondition(), this.getPreCondition(), null, "precondition", null, 2, 2,
 				BooleanExpression.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

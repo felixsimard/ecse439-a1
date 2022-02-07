@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 
 public class RoomPage extends JFrame {
 	
@@ -63,7 +64,7 @@ public class RoomPage extends JFrame {
 	private String error = null;
 	
 	private DefaultTableModel roomsDtm;
-	private String specificDevicesColumnNames[] = {"Devices in this room"};
+	private String specificDevicesColumnNames[] = {"Device Name", "Device Type"};
 	private static final int HEIGHT_TEAMS_TABLE = 100;
 	
 	public RoomPage() {
@@ -338,6 +339,11 @@ public class RoomPage extends JFrame {
 	private void addSpecificDeviceButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		String roomSelected = (String) roomsList.getSelectedItem();
 		String deviceTypeSelected = (String) devicesList.getSelectedItem();
+		if(devicesList.getSelectedIndex() == -1) {
+			error = "Select a device type to add to this room";
+			refreshData(roomSelected);
+			return;
+		}
 		Device d = HALController.findDevice(deviceTypeSelected);
 		String uniqueDeviceName = newSpecificDeviceTextField.getText();
 		HALController.addSpecificDeviceToRoom(roomSelected, deviceTypeSelected, uniqueDeviceName, d.getClass().getCanonicalName().toString());
@@ -346,7 +352,6 @@ public class RoomPage extends JFrame {
 	
 	// TODO this methods needs to get the room from the combo box
 	private void specificDevicesTableDeleteKeyActionPerformed(java.awt.event.ActionEvent evt) {
-		System.out.println("deleteing sd");
 		if (specificDeviceTable.getSelectedRow() != -1) {
 			String specificDeviceName = (String) specificDeviceTable.getModel().getValueAt(specificDeviceTable.getSelectedRow(), 0);
 			String roomSelected = (String) roomsList.getSelectedItem();
@@ -379,7 +384,7 @@ public class RoomPage extends JFrame {
 	}
 	
 	private void updateRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		error = HALController.updateRoomName(newRoomNameTextField.getText(), roomNameText.getText());
+		error = HALController.updateRoomName(newRoomNameTextField.getText(), roomsList.getSelectedItem().toString());
 		refreshData(newRoomNameTextField.getText());
 	}
 	
@@ -388,8 +393,9 @@ public class RoomPage extends JFrame {
 		roomsDtm.setColumnIdentifiers(specificDevicesColumnNames);
 		specificDeviceTable.setModel(roomsDtm);
 		if (foundRoom != null) {
+			Iterator<String> deviceTypesIterator = foundRoom.getDeviceTypes().iterator();
 			for (String sd : foundRoom.getSpecificDeviceNames()) {
-				Object[] obj = {sd};
+				Object[] obj = {sd, deviceTypesIterator.next()};
 				roomsDtm.addRow(obj);
 			}
 		}
