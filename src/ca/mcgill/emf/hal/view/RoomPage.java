@@ -346,22 +346,19 @@ public class RoomPage extends JFrame {
 		}
 		Device d = HALController.findDevice(deviceTypeSelected);
 		String uniqueDeviceName = newSpecificDeviceTextField.getText();
-		HALController.addSpecificDeviceToRoom(roomSelected, deviceTypeSelected, uniqueDeviceName, d.getClass().getCanonicalName().toString());
+		error = HALController.addSpecificDeviceToRoom(roomSelected, deviceTypeSelected, uniqueDeviceName, d.getClass().getCanonicalName().toString());
 		refreshData(roomSelected);
 	}
 	
-	// TODO this methods needs to get the room from the combo box
+
 	private void specificDevicesTableDeleteKeyActionPerformed(java.awt.event.ActionEvent evt) {
 		if (specificDeviceTable.getSelectedRow() != -1) {
 			String specificDeviceName = (String) specificDeviceTable.getModel().getValueAt(specificDeviceTable.getSelectedRow(), 0);
 			String roomSelected = (String) roomsList.getSelectedItem();
-			int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device " + specificDeviceName + "?", 
+			int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this specific device '" + specificDeviceName + "'?", 
 	        		"Confirm Deletion",	JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (choice == 0) { 
-				//System.out.println("was here");
-				//TODO --> need to get the room name
 				error = HALController.deleteSpecificDeviceFromRoom(specificDeviceName, roomSelected);
-				//error = TournamentController.removeTeam(teamName);
 				refreshData(roomSelected);
 			}
 		}
